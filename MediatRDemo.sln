@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorUI", "BlazorUI\BlazorUI.csproj", "{049D0CBD-B3A6-4537-94F0-777C3DAF4F42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoLibrary", "DemoLibrary\DemoLibrary.csproj", "{AC21080E-4F46-4BE4-B135-45F355CE1801}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{049D0CBD-B3A6-4537-94F0-777C3DAF4F42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049D0CBD-B3A6-4537-94F0-777C3DAF4F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049D0CBD-B3A6-4537-94F0-777C3DAF4F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049D0CBD-B3A6-4537-94F0-777C3DAF4F42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC21080E-4F46-4BE4-B135-45F355CE1801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC21080E-4F46-4BE4-B135-45F355CE1801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC21080E-4F46-4BE4-B135-45F355CE1801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC21080E-4F46-4BE4-B135-45F355CE1801}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

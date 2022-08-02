@@ -1,0 +1,101 @@
+﻿@page "/"
+@inject MediatR.IMediator _mediator
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<ul>
+    @if (people is not null)
+    {
+        @foreach (PersonModel person in people)
+        {
+            <li>
+                @person.FirstName @person.LastName
+                <button class="btn btn-secondary btn-sm" @onclick="() => DeletePerson(person.Id)" type="button">Delete</button>
+            </li>
+        }
+    }
+</ul>
+<br>
+<p>Person One: @personOne?.FirstName @personOne?.LastName</p>
+<br>
+<button class="btn btn-primary"
+        @onclick="ShowPersonOneHandler"
+        type="button">Show Person 1</button>
+<button class="btn btn-outline-primary"
+        @onclick="HidePersonOneHandler"
+        type="button">Hide Person 1</button>
+<br />
+<br />
+<EditForm Model="newPerson" OnSubmit="HandleNewPersonSubmit">
+    <p>
+        <label>
+            First Name:
+            <InputText @bind-Value="newPerson.FirstName"></InputText>
+        </label>
+    </p>
+    <p>
+        <label>
+            Last Name:
+            <InputText @bind-Value="newPerson.LastName"></InputText>
+        </label>
+    </p>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</EditForm>
+
+<br>
+<br>
+
+@if (newPersonResult is not null)
+{
+    <h4>New Person</h4>
+    <p>@newPersonResult.Id</p>
+    <p>@newPersonResult.FirstName @newPersonResult.LastName</p>
+}
+
+@code
+{
+    List<PersonModel>? people;
+
+    PersonModel? personOne;
+
+    PersonModel? newPersonResult;
+
+    private readonly PersonModel newPerson = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        people = await _mediator.Send(new GetPersonListQuery());
+    }
+
+    protected async void ShowPersonOneHandler()
+    {
+        personOne = await _mediator.Send(new GetPersonByIdQuery(1));
+    }
+
+    protected void HidePersonOneHandler()
+    {
+        personOne = null;
+    }
+
+    protected async void HandleNewPersonSubmit()
+    {
+        if (string.IsNullOrWhiteSpace(newPerson.FirstName) || string.IsNullOrWhiteSpace(newPerson.LastName))
+        {
+            return;
+        }
+
+        var command = new InsertPersonCommand(newPerson.FirstName, newPerson.LastName);
+        newPersonResult = await _mediator.Send(command);
+        people = await _mediator.Send(new GetPersonListQuery());
+    }
+
+    protected async void DeletePerson(int id)
+    {
+        await _mediator.Send(new RemovePersonCommand(id));
+        people = await _mediator.Send(new GetPersonListQuery());
+    }
+}
